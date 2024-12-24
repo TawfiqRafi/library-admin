@@ -21,5 +21,15 @@ Route::group(['namespace' => 'api'], function () {
 
     Route::middleware(['auth:api'])->group(function () {
         Route::post('/user/update', [UserLoginController::class, 'updateProfile']);
+
+        Route::prefix('books')->group(function () {
+            Route::get('/', [BookController::class, 'index']);
+            Route::post('store', [BookController::class, 'store']);
+            Route::get('{id}', [BookController::class, 'show']);
+            Route::put('edit/{id}', [BookController::class, 'update']);
+            Route::delete('delete/{id}', [BookController::class, 'destroy']);
+        });
+
     });
 });
+
