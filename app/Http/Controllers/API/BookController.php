@@ -29,6 +29,12 @@ class BookController extends Controller
             });
         }
         $paginator = $query->paginate($request['limit'], ['*'], 'page', $request['offset']);
+        $paginator->setCollection(
+            $paginator->getCollection()->map(function ($book) {
+                $book->available = !$book->borrowings()->whereNull('returned_at')->exists();
+                return $book;
+            })
+        );
         $data=[
             'total_size' => $paginator->total(),
             'limit' => $request['limit'],
