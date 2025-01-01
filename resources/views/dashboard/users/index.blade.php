@@ -3,10 +3,10 @@
 @section('content')
     <div class="mt-4">
         <div class="card shadow">
-            <div class="card-header d-flex justify-content-between align-items-center">
+            <div class="card-header p-3 d-flex justify-content-between align-items-center">
                 <h3 class="mb-0">User List</h3>
                 <form method="GET" action="{{ route('users.index') }}" class="form-inline">
-                    <div class="input-group">
+                    <div class="d-flex gap-2 flex-nowrap">
                         <input
                             type="text"
                             name="search"
@@ -14,17 +14,15 @@
                             class="form-control"
                             placeholder="Search users"
                             aria-label="Search users">
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-search"></i> Search
-                            </button>
-                        </div>
+                        <button type="submit" class="btn btn-primary text-nowrap btn-sm px-3">
+                            <i class="fas fa-search"></i> Search
+                        </button>
                     </div>
                 </form>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
+                    <table class="table align-middle table-bordered table-hover" style="min-width: 600px">
                         <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>
@@ -36,11 +34,11 @@
                         <tbody>
                         @foreach ($users as $key => $user)
                             <tr>
-                                <th scope="row">{{ $key + 1 + ($users->currentPage() - 1) * $users->perPage() }}</th>
+                                <td>{{ $key + 1 + ($users->currentPage() - 1) * $users->perPage() }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-sm btn-info">
+                                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-sm btn-info text-nowrap">
                                         <i class="fas fa-eye"></i> View Details
                                     </a>
                                 </td>

@@ -1,13 +1,13 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <div class="box">
-        <div class="box-header with-action">
-            <h5 class="box-title">Update Book</h5>
-            <a href="{{ route('book.list') }}" class="btn btn-sm btn-secondary float-right">Book List</a>
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center p-3">
+            <h5 class="mb-0">Update Book</h5>
+            <a href="{{ route('book.list') }}" class="btn btn-sm btn-secondary">Book List</a>
         </div>
         {!! Form::open(['route' => ['book.update', $book->slug], 'method' => 'PUT']) !!}
-        <div class="box-body">
+        <div class="card-body">
             <div class="form-group row">
                 <label for="" class="col-md-3 col-form-label"></label>
                 <div class="col-md-9">

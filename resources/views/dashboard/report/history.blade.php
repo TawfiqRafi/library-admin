@@ -1,32 +1,30 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <div class="card shadow mt-4">
-        <div class="card-header d-flex justify-content-between align-items-center">
+    <div class="card shadow">
+        <div class="card-header p-3">
             <h3 class="mb-0">All-Time Borrow History</h3>
         </div>
         <div class="card-body">
             <!-- Search Form -->
             <form class="mb-3" method="GET" action="{{ route('report.history') }}">
-                <div class="input-group">
+                <div class="d-flex gap-2 flex-nowrap">
                     <input type="text" name="search" value="{{ $search }}" class="form-control" placeholder="Search by user or book title">
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-primary">Search</button>
-                    </div>
+                    <button type="submit" class="btn btn-primary text-nowrap btn-sm px-3">Search</button>
                 </div>
             </form>
 
-            <table class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                    <th>Sl</th>
-                    <th>User</th>
-                    <th>Book Title</th>
-                    <th>Author</th>
-                    <th>BarCode</th>
-                    <th>Borrowed At</th>
-                    <th>Returned At</th>
-                </tr>
+            <table class="table table-bordered align-middle table-hover">
+                <thead class="text-nowrap" style="min-width: 700px">
+                    <tr>
+                        <th>Sl</th>
+                        <th>User</th>
+                        <th>Book Title</th>
+                        <th>Author</th>
+                        <th>BarCode</th>
+                        <th>Borrowed At</th>
+                        <th>Returned At</th>
+                    </tr>
                 </thead>
                 <tbody>
                 @foreach ($borrowings as $key => $borrowing)
@@ -36,11 +34,15 @@
                         <td>{{ $borrowing->book->title }}</td>
                         <td>{{ $borrowing->book->author }}</td>
                         <td>
-                            @php
-                                $generator = new Picqer\Barcode\BarcodeGeneratorPNG();
-                            @endphp
-                            <img src="data:image/png;base64,{{ base64_encode($generator->getBarcode($borrowing->book->barcode, $generator::TYPE_CODE_128)) }}" alt="Barcode">
-                            <br>{{ $borrowing->book->barcode }}
+                            <div style="min-width: 200px">
+                                @php
+                                    $generator = new Picqer\Barcode\BarcodeGeneratorPNG();
+                                @endphp
+                                <img src="data:image/png;base64,{{ base64_encode($generator->getBarcode($borrowing->book->barcode, $generator::TYPE_CODE_128)) }}" alt="Barcode">
+                                <div class="mt-2">
+                                    {{ $borrowing->book->barcode }}
+                                </div>
+                            </div>
                         </td>
                         <td>{{ $borrowing->borrowed_at->format('Y-m-d H:i') }}</td>
                         <td>

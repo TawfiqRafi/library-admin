@@ -3,14 +3,14 @@
 @section('content')
     <div class="mt-4">
         <div class="card shadow">
-            <div class="card-header d-flex justify-content-between align-items-center">
+            <div class="card-header d-flex justify-content-between align-items-center p-3">
                 <h3 class="mb-0">Available Book List</h3>
                 <a href="{{ route('book.create') }}" class="btn btn-sm btn-secondary">Create new</a>
             </div>
             <div class="card-body">
                 <!-- Search Form -->
                 <form method="GET" action="{{ route('book.list') }}" class="mb-3">
-                    <div class="input-group">
+                    <div class="d-flex gap-2 flex-nowrap">
                         <input
                             type="text"
                             name="search"
@@ -18,31 +18,29 @@
                             class="form-control"
                             placeholder="Search books"
                             aria-label="Search books">
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-search"></i> Search
-                            </button>
-                        </div>
+                        <button type="submit" class="btn btn-primary text-nowrap btn-sm px-3">
+                            <i class="fas fa-search"></i> Search
+                        </button>
                     </div>
                 </form>
 
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th>#</th>
-                            <th>Title</th>
-                            <th>Image</th>
-                            <th>Author</th>
-                            <th>Barcode</th>
-                            <th class="text-center">Actions</th>
-                        </tr>
+                    <table class="table table-bordered align-middle table-hover" style="min-width: 600px">
+                        <thead class="thead-dark text-nowrap">
+                            <tr>
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>Image</th>
+                                <th>Author</th>
+                                <th>Barcode</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
                         </thead>
                         <tbody>
                         @if($books->isNotEmpty())
                             @foreach ($books as $key => $book)
                                 <tr>
-                                    <th scope="row">{{ $key + 1 + ($books->currentPage() - 1) * $books->perPage() }}</th>
+                                    <td scope="row">{{ $key + 1 + ($books->currentPage() - 1) * $books->perPage() }}</td>
                                     <td>{{ $book->title }}</td>
                                     <td>
                                         @if($book->image)
