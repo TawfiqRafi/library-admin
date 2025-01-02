@@ -20,6 +20,7 @@ class CreateBooksTable extends Migration
             $table->string('author');
             $table->string('image');
             $table->string('barcode')->unique();
+            $table->foreignId('add_by')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

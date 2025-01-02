@@ -79,6 +79,7 @@ class BookController extends Controller
         $book->title = $request->get('title');
         $book->author = $request->get('author');
         $book->barcode = $barcodeValue;
+        $book->add_by = Auth::user()->id;
         if ($request->has('image')) {
             $path = Helpers::file_upload($request,'image','book');
         }

@@ -10,12 +10,17 @@ class Book extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'author', 'image', 'barcode'];
+    protected $fillable = ['title', 'author', 'image', 'barcode','add_by'];
 
 
     public function borrowings()
     {
         return $this->hasMany(Borrowing::class);
+    }
+
+    public function addedBy()
+    {
+        return $this->belongsTo(User::class, 'add_by');
     }
 
     protected static function boot()

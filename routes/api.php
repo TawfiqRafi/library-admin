@@ -25,6 +25,7 @@ Route::group(['namespace' => 'api'], function () {
         Route::post('/user/update', [UserLoginController::class, 'updateProfile']);
 
         Route::prefix('books')->group(function () {
+            Route::get('list', [BookController::class, 'user_index']);
             Route::post('store', [BookController::class, 'store']);
             Route::get('{id}', [BookController::class, 'show']);
             Route::put('edit/{id}', [BookController::class, 'update']);

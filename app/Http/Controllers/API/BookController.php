@@ -45,6 +45,42 @@ class BookController extends Controller
         return response()->json($data, 200);
     }
 
+    public function user_index(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'limit' => 'required',
+            'offset' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => Helpers::error_processor($validator)], 403);
+        }
+        $key = explode(' ', $request['title'] ?? '');
+        $query = Book::query()->where('add_by', auth()->user()->id);
+        if (!empty($key)) {
+            $query->where(function ($q) use ($key) {
+                foreach ($key as $k) {
+                    $q->orWhere('title', 'like', '%' . $k . '%');
+                }
+            });
+        }
+        $paginator = $query->paginate($request['limit'], ['*'], 'page', $request['offset']);
+        $paginator->setCollection(
+            $paginator->getCollection()->map(function ($book) {
+                $book->available = !$book->borrowings()->whereNull('returned_at')->exists();
+                return $book;
+            })
+        );
+        $data=[
+            'total_size' => $paginator->total(),
+            'limit' => $request['limit'],
+            'offset' => $request['offset'],
+            'books' => $paginator->items()
+        ];
+
+        return response()->json($data, 200);
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -63,6 +99,7 @@ class BookController extends Controller
         $book->title = $request->get('title');
         $book->author = $request->get('author');
         $book->barcode = $barcodeValue;
+        $book->add_by = auth()->user()->id;
 
         if ($request->hasFile('image')) {
             $path = Helpers::file_upload($request, 'image', 'book');
@@ -109,7 +146,7 @@ class BookController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $book = Book::find($id);
+        $book = Book::where('add_by', auth()->user()->id)->find($id);
 
         if (!$book) {
             return response()->json([
@@ -145,7 +182,7 @@ class BookController extends Controller
 
     public function destroy($id)
     {
-        $book = Book::find($id);
+        $book = Book::where('add_by', auth()->user()->id)->find($id);
 
         if (!$book) {
             return response()->json([

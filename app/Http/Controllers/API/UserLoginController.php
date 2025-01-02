@@ -99,6 +99,14 @@ class UserLoginController extends Controller
             $user->password = Hash::make($request->password);
         }
 
+        if ($request->hasFile('image')) {
+            if ($user->image && file_exists($user->image)) {
+                unlink($user->image);
+            }
+            $path = Helpers::file_upload($request, 'image', 'user');
+            $user->image = $path;
+        }
+
         $user->save();
 
         return response()->json([
@@ -110,7 +118,7 @@ class UserLoginController extends Controller
     {
         $user = auth()->user();
 
-        $profile = $user->only(['id', 'name', 'email', 'is_admin', 'created_at', 'updated_at']);
+        $profile = $user->only(['id', 'name', 'email', 'is_admin', 'image', 'created_at', 'updated_at']);
 
         return response()->json($profile, 200);
     }

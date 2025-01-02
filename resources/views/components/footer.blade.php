@@ -14,7 +14,7 @@
 {{--                    All Rights Reserved.--}}
 {{--                </span>                --}}
                 <span class="mr-1">
-                    Developed by Team <strong>StackMart</strong>
+                    © Developed by Team <strong>StackMart</strong>
                 </span>
             </div>
         </div>
