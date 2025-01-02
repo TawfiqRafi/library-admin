@@ -21,7 +21,7 @@ class BookController extends Controller
                 }
             });
         }
-        $paginator = $query->paginate(25);
+        $paginator = $query->paginate(10);
         $data = [
             'page_title' => 'book List',
             'books' => $paginator,
@@ -45,7 +45,7 @@ class BookController extends Controller
                 }
             });
         }
-        $paginator = $query->paginate(25);
+        $paginator = $query->paginate(10);
         $data = [
             'page_title' => 'Available book List',
             'books' => $paginator,

@@ -18,7 +18,7 @@ class UserController extends Controller
         $users = User::when($search, function ($query, $search) {
             $query->where('name', 'like', "%$search%")
                 ->orWhere('email', 'like', "%$search%");
-        })->where('is_admin',0)->paginate(25);
+        })->where('is_admin',0)->paginate(10);
 
         $data = [
             'page_title' => 'Users List',

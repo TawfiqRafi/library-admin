@@ -26,7 +26,7 @@ class ReportController extends Controller
                             ->orWhere('author', 'like', '%' . $search . '%');
                     });
             })
-            ->paginate(25);
+            ->paginate(10);
 
         $data = [
             'page_title' => 'Current borrowed book List',
@@ -51,7 +51,7 @@ class ReportController extends Controller
                             ->orWhere('author', 'like', '%' . $search . '%');
                     });
             })
-            ->paginate(25);
+            ->paginate(10);
 
         $data = [
             'page_title' => 'Current borrowed book List',
