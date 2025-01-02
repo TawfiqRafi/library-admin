@@ -106,5 +106,14 @@ class UserLoginController extends Controller
         ], 200);
     }
 
+    public function getProfile(Request $request)
+    {
+        $user = auth()->user();
+
+        $profile = $user->only(['id', 'name', 'email', 'is_admin', 'created_at', 'updated_at']);
+
+        return response()->json($profile, 200);
+    }
+
 }
 

@@ -5,6 +5,13 @@
 
         $(document).on('click', '#nav-control', function() {
             $('main').toggleClass('mini-nav');
+            // Toggle the icon based on the current state
+            const iconElement = $('#nav-control i');
+            if ($('main').hasClass('mini-nav')) {
+                iconElement.removeClass('bx-chevron-left').addClass('bx-chevron-right');
+            } else {
+                iconElement.removeClass('bx-chevron-right').addClass('bx-chevron-left');
+            }
             console.log($('#nav-control').html());
         });
 

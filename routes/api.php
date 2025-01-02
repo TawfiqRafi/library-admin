@@ -18,12 +18,13 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'api'], function () {
     Route::post('/user/login', [UserLoginController::class, 'login']);
     Route::post('/user/register', [UserLoginController::class, 'register']);
+    Route::get('books/', [BookController::class, 'index']);
 
     Route::middleware(['auth:api'])->group(function () {
+        Route::get('/user/profile', [UserLoginController::class, 'getProfile']);
         Route::post('/user/update', [UserLoginController::class, 'updateProfile']);
 
         Route::prefix('books')->group(function () {
-            Route::get('/', [BookController::class, 'index']);
             Route::post('store', [BookController::class, 'store']);
             Route::get('{id}', [BookController::class, 'show']);
             Route::put('edit/{id}', [BookController::class, 'update']);

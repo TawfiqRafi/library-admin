@@ -7,7 +7,7 @@
                     <h2>6amTech Library</h2>
                 </a>
             </div>
-            <span id="nav-control"><i class="bx bx-arrow-from-right"></i></span>
+            <span id="nav-control"><i class="bx bx-chevron-left py-4"></i></span>
         </div>
         <div class="header-right">
             <div class="header-nav">

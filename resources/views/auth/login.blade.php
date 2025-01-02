@@ -3,7 +3,7 @@
 @section('content')
     <div class="auth-box login-box">
         <div class="auth-box-header">
-            <h2 class="auth-box-title">Welcome Back!</h2>
+            <h2 class="auth-box-title">Admin Login</h2>
         </div>
         <div class="auth-box-body">
             {!! Form::open(['route' => 'login', 'method' => 'POST']) !!}
@@ -36,8 +36,8 @@
             </div>
             {!! Form::close() !!}
         </div>
-        <div class="auth-box-footer">
-
+        <div class="auth-box-footer text-center">
+            <p>Developed by Team <strong>StackMart</strong></p>
         </div>
     </div>
 @endsection
