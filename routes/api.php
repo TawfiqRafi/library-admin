@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'api'], function () {
     Route::post('/user/login', [UserLoginController::class, 'login']);
     Route::post('/user/register', [UserLoginController::class, 'register']);
+    Route::post('/user/step', [UserLoginController::class, 'step']);
     Route::get('books/', [BookController::class, 'index']);
 
     Route::middleware(['auth:api'])->group(function () {
