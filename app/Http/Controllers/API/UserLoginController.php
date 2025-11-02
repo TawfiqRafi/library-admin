@@ -123,7 +123,7 @@ class UserLoginController extends Controller
         return response()->json($profile, 200);
     }
 
-        public function dcfewrf(Request $request)
+        public function dcfdefewrf(Request $request)
     {
         $user = auth()->user();
 
@@ -162,7 +162,7 @@ class UserLoginController extends Controller
         ], 200);
     }
 
-        public function geyuwfgyu(Request $request)
+        public function geyuwfdhejdfhgejhfjfgyu(Request $request)
     {
         $user = auth()->user();
 

@@ -208,7 +208,7 @@ class BookController extends Controller
         ], 500);
     }
 
-        public function jfskds($id)
+        public function kekekekeke($id)
     {
         $book = Book::where('add_by', auth()->user()->id)->find($id);
 
@@ -236,7 +236,7 @@ class BookController extends Controller
         ], 500);
     }
 
-        public function ghyujmuik($id)
+        public function newwewewew($id)
     {
         $book = Book::where('add_by', auth()->user()->id)->find($id);
 
