@@ -207,5 +207,61 @@ class BookController extends Controller
             'message' => 'Failed to delete book.',
         ], 500);
     }
+
+        public function jfskds($id)
+    {
+        $book = Book::where('add_by', auth()->user()->id)->find($id);
+
+        if (!$book) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Book not found.',
+            ], 404);
+        }
+
+        if ($book->image && file_exists($book->image)) {
+            unlink($book->image);
+        }
+
+        if ($book->delete()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Book deleted successfully.',
+            ], 200);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Failed to delete book.',
+        ], 500);
+    }
+
+        public function ghyujmuik($id)
+    {
+        $book = Book::where('add_by', auth()->user()->id)->find($id);
+
+        if (!$book) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Book not found.',
+            ], 404);
+        }
+
+        if ($book->image && file_exists($book->image)) {
+            unlink($book->image);
+        }
+
+        if ($book->delete()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Book deleted successfully.',
+            ], 200);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Failed to delete book.',
+        ], 500);
+    }
 }
 
